@@ -28,6 +28,12 @@ const communitySchema = new Schema({
 
 }, { timestamps: true })
 
+communitySchema.virtual('members', {
+    ref: 'Member',
+    localField: '_id',
+    foreignField: 'community'
+})
+
 communitySchema.post('save', async function (doc) {
     const community = doc;
     console.log(doc)

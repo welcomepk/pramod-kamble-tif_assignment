@@ -19,7 +19,14 @@ const memberSchema = new Schema({
         required: true,
         ref: 'Role'
     }
-}, { timestamps: true })
+}, { timestamps: true, strictPopulate: false })
+
+// memberSchema.methods.toJSON = function () {
+//     const member = this.toObject();
+//     member.id = member._id
+//     delete member._id
+//     return member
+// }
 
 const Member = model('Member', memberSchema)
 

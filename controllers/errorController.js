@@ -40,9 +40,10 @@ module.exports = (err, req, res, next) => {
     try {
         if (err.name === 'ValidationError') return err = handleValidationError(err, res);
         console.log("error code ==> ", err.code);
-        if (err?.code) return err = handleDuplicateKeyError(err, res);
+        if (err.code) return err = handleDuplicateKeyError(err, res);
+        res.status(500).send('Internal server error');
     } catch (err) {
         console.log(err);
-        res.status(500).send('An unknown error occurred.');
+        res.status(500).send('Internal server error');
     }
 }

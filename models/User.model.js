@@ -36,10 +36,21 @@ const userSchema = new Schema({
     }
 }, { timestamps: true })
 
+userSchema.virtual('communities', {
+    ref: 'Community',
+    localField: '_id',
+    foreignField: 'owner'
+})
+userSchema.virtual('member', {
+    ref: 'Member',
+    localField: '_id',
+    foreignField: 'user'
+})
+
 // generate and save token for a user
 userSchema.methods.generateAuthToken = async function () {
     const user = this;
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' })
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1 day' })
     user.tokens = user.tokens.concat({ token })
     await user.save()
     return token
