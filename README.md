@@ -6,5 +6,5 @@
 ## steps:
 
 - npm i
-- add envirnment variable JWT_SECRET
+- add envirnment variable "JWT_SECRET"
 - "npm run dev" execute this command from root directory
